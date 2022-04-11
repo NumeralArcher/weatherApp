@@ -66,8 +66,6 @@ class _MyAppState extends State<MyApp> {
   void _search() async {
     final response = await _dataService.getWeather(_cityTextController.text);
     print(response.weatherinfo);
-    print(response.tempInfo.temperature);
-    print(response.weatherinfo.description);
   }
 }
 
