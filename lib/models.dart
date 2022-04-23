@@ -1,5 +1,7 @@
 import 'package:assignment/dataService.dart';
 import 'package:assignment/main.dart';
+import 'dart:convert';
+
 /*{
   "status": "success",
   "data": {
@@ -22,13 +24,185 @@ import 'package:assignment/main.dart';
     }
 }
 */
-class weatherResponse{
+// To parse this JSON data, do
+//
+//     final weatherResponse = weatherResponseFromJson(jsonString);
+
+WeatherResponse weatherResponseFromJson(String str) => WeatherResponse.fromJson(json.decode(str));
+
+String weatherResponseToJson(WeatherResponse data) => json.encode(data.toJson());
+
+class WeatherResponse {
+  WeatherResponse({
+    required this.status,
+    required this.data,
+  });
+
+  String status;
+  Data data;
+
+  factory WeatherResponse.fromJson(Map<String, dynamic> json) => WeatherResponse(
+    status: json["status"],
+    data: Data.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "data": data.toJson(),
+  };
+}
+
+class Data {
+  Data({
+    required this.city,
+    required this.state,
+    required this.country,
+    required this.location,
+    required this.current,
+  });
+
+  String city;
+  String state;
+  String country;
+  Location location;
+  Current current;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    city: json["city"],
+    state: json["state"],
+    country: json["country"],
+    location: Location.fromJson(json["location"]),
+    current: Current.fromJson(json["current"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "city": city,
+    "state": state,
+    "country": country,
+    "location": location.toJson(),
+    "current": current.toJson(),
+  };
+}
+
+class Current {
+  Current({
+    required this.pollution,
+    required this.weather,
+  });
+
+  Pollution pollution;
+  Weather weather;
+
+  factory Current.fromJson(Map<String, dynamic> json) => Current(
+    pollution: Pollution.fromJson(json["pollution"]),
+    weather: Weather.fromJson(json["weather"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "pollution": pollution.toJson(),
+    "weather": weather.toJson(),
+  };
+}
+
+class Pollution {
+  Pollution({
+    required this.ts,
+    required this.aqius,
+    required this.mainus,
+    required this.aqicn,
+    required this.maincn,
+  });
+
+  DateTime ts;
+  int aqius;
+  String mainus;
+  int aqicn;
+  String maincn;
+
+  factory Pollution.fromJson(Map<String, dynamic> json) => Pollution(
+    ts: DateTime.parse(json["ts"]),
+    aqius: json["aqius"],
+    mainus: json["mainus"],
+    aqicn: json["aqicn"],
+    maincn: json["maincn"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "ts": ts.toIso8601String(),
+    "aqius": aqius,
+    "mainus": mainus,
+    "aqicn": aqicn,
+    "maincn": maincn,
+  };
+}
+
+class Weather {
+  Weather({
+    required this.ts,
+    required this.tp,
+    required this.pr,
+    required this.hu,
+    required this.ws,
+    required this.wd,
+    required this.ic,
+  });
+
+  DateTime ts;
+  int tp;
+  int pr;
+  int hu;
+  double ws;
+  int wd;
+  String ic;
+
+  factory Weather.fromJson(Map<String, dynamic> json) => Weather(
+    ts: DateTime.parse(json["ts"]),
+    tp: json["tp"],
+    pr: json["pr"],
+    hu: json["hu"],
+    ws: json["ws"].toDouble(),
+    wd: json["wd"],
+    ic: json["ic"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "ts": ts.toIso8601String(),
+    "tp": tp,
+    "pr": pr,
+    "hu": hu,
+    "ws": ws,
+    "wd": wd,
+    "ic": ic,
+  };
+}
+
+class Location {
+  Location({
+    required this.type,
+    required this.coordinates,
+  });
+
+  String type;
+  List<double> coordinates;
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+    type: json["type"],
+    coordinates: List<double>.from(json["coordinates"].map((x) => x.toDouble())),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "type": type,
+    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
+  };
+}
+
+/*class weatherResponse{
   final DataInfo dateInfo;
   //final TemperatureInfo tempInfo;
   //final Weatherinfo weatherinfo;
-  /*String get iconUrl{
+  *//*String get iconUrl{
     return 'https://airvisual.com/images${weatherinfo.icon}.png';
-  }*/
+  }*//*
 
   weatherResponse(this.dateInfo);
   //weatherResponse(required this.tempInfo, required this.weatherinfo});
@@ -52,7 +226,7 @@ class DataInfo {
     final currentInfo = json['current'];
     return DataInfo(currentInfo: currentInfo);
   }
-}
+}*/
 
 /*class Weatherinfo {
   final String ;
@@ -143,166 +317,3 @@ class WeatherResponse {
         cityName: cityName, tempInfo: tempInfo, weatherInfo: weatherInfo);
   }
 }*/
-/*class weatherResponse {
-  String? status;
-  Data? data;
-
-  weatherResponse({this.status, this.data});
-
-  weatherResponse.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
-}
-
-class Data {
-  String? city;
-  String? state;
-  String? country;
-  Location? location;
-  Current? current;
-
-  Data({this.city, this.state, this.country, this.location, this.current});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    city = json['city'];
-    state = json['state'];
-    country = json['country'];
-    location = json['location'] != null
-        ? new Location.fromJson(json['location'])
-        : null;
-    current =
-        json['current'] != null ? new Current.fromJson(json['current']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['country'] = this.country;
-    if (this.location != null) {
-      data['location'] = this.location!.toJson();
-    }
-    if (this.current != null) {
-      data['current'] = this.current!.toJson();
-    }
-    return data;
-  }
-}
-
-class Location {
-  String? type;
-  List<double>? coordinates;
-
-  Location({this.type, this.coordinates});
-
-  Location.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    coordinates = json['coordinates'].cast<double>();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
-    data['coordinates'] = this.coordinates;
-    return data;
-  }
-}
-
-class Current {
-  Pollution? pollution;
-  Weather? weather;
-
-  Current({this.pollution, this.weather});
-
-  Current.fromJson(Map<String, dynamic> json) {
-    pollution = json['pollution'] != null
-        ? new Pollution.fromJson(json['pollution'])
-        : null;
-    weather =
-        json['weather'] != null ? new Weather.fromJson(json['weather']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.pollution != null) {
-      data['pollution'] = this.pollution!.toJson();
-    }
-    if (this.weather != null) {
-      data['weather'] = this.weather!.toJson();
-    }
-    return data;
-  }
-}
-
-class Pollution {
-  String? ts;
-  int? aqius;
-  String? mainus;
-  int? aqicn;
-  String? maincn;
-
-  Pollution({this.ts, this.aqius, this.mainus, this.aqicn, this.maincn});
-
-  Pollution.fromJson(Map<String, dynamic> json) {
-    ts = json['ts'];
-    aqius = json['aqius'];
-    mainus = json['mainus'];
-    aqicn = json['aqicn'];
-    maincn = json['maincn'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ts'] = this.ts;
-    data['aqius'] = this.aqius;
-    data['mainus'] = this.mainus;
-    data['aqicn'] = this.aqicn;
-    data['maincn'] = this.maincn;
-    return data;
-  }
-}
-
-class Weather {
-  String? ts;
-  int? tp;
-  int? pr;
-  int? hu;
-  double? ws;
-  int? wd;
-  String? ic;
-
-  Weather({this.ts, this.tp, this.pr, this.hu, this.ws, this.wd, this.ic});
-
-  Weather.fromJson(Map<String, dynamic> json) {
-    ts = json['ts'];
-    tp = json['tp'];
-    pr = json['pr'];
-    hu = json['hu'];
-    ws = json['ws'];
-    wd = json['wd'];
-    ic = json['ic'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ts'] = this.ts;
-    data['tp'] = this.tp;
-    data['pr'] = this.pr;
-    data['hu'] = this.hu;
-    data['ws'] = this.ws;
-    data['wd'] = this.wd;
-    data['ic'] = this.ic;
-    return data;
-  }
-}
-*/
