@@ -1,74 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:assignment/dataService.dart';
-void main(){
-  runApp(MyApp());
+import 'loginpage.dart';
+import 'profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+void main() {
+  runApp( MyApp());
+
 }
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+class MyApp extends StatelessWidget{
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-  final _cityTextController = TextEditingController();
-  final _stateTextController = TextEditingController();
-  final _countryTextController = TextEditingController();
-
-  final _dataService = dataService();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
-      home : Scaffold(
-        body: Center(
-          child : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children : [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child : SizedBox(
-                  width : 150,
-                  child :TextField(
-                    controller: _cityTextController,
-                    decoration: InputDecoration(labelText: 'City'),
-                    textAlign: TextAlign.center),
-                  )
-                ),
-              Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child : SizedBox(
-                    width : 150,
-                    child :TextField(
-                        controller: _stateTextController,
-                        decoration: InputDecoration(labelText: 'State'),
-                        textAlign: TextAlign.center),
-                  )
-              ),
-              Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child : SizedBox(
-                    width : 150,
-                    child :TextField(
-                        controller: _countryTextController,
-                        decoration: InputDecoration(labelText: 'Country'),
-                        textAlign: TextAlign.center),
-                  )
-              ),
-
-              ElevatedButton(onPressed: _search, child: Text('Search'))
-            ]
-          )
-        )
-      )
+      title: 'Flutter login UI',
+      debugShowCheckedModeBanner:false,
+      home: HomePage(),
     );
   }
-  void _search() async {
-    final response = await _dataService.getWeather(_cityTextController.text,_stateTextController.text,_countryTextController.text);
-    print(response.data.city);
-    print(response.data.current.weather.tp);
-
+}
+class HomePage extends StatefulWidget{
+  const HomePage({Key? key} ): super(key: key);
+  @override
+  HomePageState createState() => HomePageState();
+}
+class HomePageState extends State<HomePage>{
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp= await Firebase.initializeApp();
+    return firebaseApp;
+  }
+  @override
+  Widget build (BuildContext){
+    return Scaffold(
+      body:FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return loginpage();
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
   }
 }
-
