@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:assignment/dataService.dart';
-import 'package:assignment/models.dart';
 void main(){
   runApp(MyApp());
 }
@@ -14,9 +13,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   final _cityTextController = TextEditingController();
-  /*
   final _stateTextController = TextEditingController();
-  final _countryTextController = TextEditingController();*/
+  final _countryTextController = TextEditingController();
 
   final _dataService = dataService();
 
@@ -38,8 +36,7 @@ class _MyAppState extends State<MyApp> {
                     textAlign: TextAlign.center),
                   )
                 ),
-
-/* Padding(
+              Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child : SizedBox(
                     width : 150,
@@ -58,7 +55,7 @@ class _MyAppState extends State<MyApp> {
                         decoration: InputDecoration(labelText: 'Country'),
                         textAlign: TextAlign.center),
                   )
-              ),*/
+              ),
 
               ElevatedButton(onPressed: _search, child: Text('Search'))
             ]
@@ -68,7 +65,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
   void _search() async {
-    final response = await _dataService.getWeather(_cityTextController.text);
+    final response = await _dataService.getWeather(_cityTextController.text,_stateTextController.text,_countryTextController.text);
     print(response.data.city);
     print(response.data.current.weather.tp);
 
