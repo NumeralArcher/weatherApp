@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'Drawer.dart';
+import 'package:assignment/dataService.dart';
+import 'dataService.dart';
+import 'package:assignment/weatherSearch.dart';
+import 'weatherSearch.dart';
 
 class HomePage extends StatelessWidget {
+
+  final _dataService = dataService();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -170,5 +177,11 @@ class HomePage extends StatelessWidget {
       ),
 
     );
+  }
+  void _search() async {
+    final response = await _dataService.getWeather(_cityTextController.text,_stateTextController.text,_countryTextController.text);
+    print(response.data.city);
+    print(response.data.current.weather.tp);
+    print(response.data.current.pollution.aqius);
   }
 }
