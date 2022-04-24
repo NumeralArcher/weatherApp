@@ -1,49 +1,33 @@
-import 'package:flutter/material.dart';
-import 'loginpage.dart';
-import 'profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:assignment/HomePage.dart';
+import 'LoginLayout.dart';
 
-void main() {
-  runApp( MyApp());
-
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
 
+//MyApp
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter login UI',
-      debugShowCheckedModeBanner:false,
-      home: HomePage(),
+      debugShowCheckedModeBanner : false,
+      home: LoginLayout(),
     );
   }
 }
-class HomePage extends StatefulWidget{
-  const HomePage({Key? key} ): super(key: key);
-  @override
-  HomePageState createState() => HomePageState();
-}
-class HomePageState extends State<HomePage>{
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp= await Firebase.initializeApp();
-    return firebaseApp;
-  }
-  @override
-  Widget build (BuildContext){
-    return Scaffold(
-      body:FutureBuilder(
-        future: _initializeFirebase(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return loginpage();
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
-    );
-  }
-}
+
+
+// This widget is the home page of your application. It is stateful, meaning
+// that it has a State object (defined below) that contains fields that affect
+// how it looks.
+
+// This class is the configuration for the state. It holds the values (in this
+// case the title) provided by the parent (in this case the App widget) and
+// used by the build method of the State. Fields in a Widget subclass are
+// always marked "final".
+
