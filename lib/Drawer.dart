@@ -71,11 +71,11 @@ Widget buildMenuItem({
 void selectedItem(BuildContext context, int index){
   Navigator.of(context).pop();
   switch(index){
-    case 1:
+/*    case 1:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => HomePage(),
       ));
-      break;
+      break;*/
     case 2:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => weatherSearch(),

@@ -439,9 +439,9 @@ class SignUpPagestate extends State<SignUpPage> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully ");
 
-    Navigator.pushAndRemoveUntil(
+  /*  Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => HomePage()),
             (route) => false);
-  }
+  */}
 }

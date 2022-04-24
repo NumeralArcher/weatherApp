@@ -1,3 +1,5 @@
+import 'package:assignment/weatherSearch.dart';
+
 import 'HomePage.dart';
 import 'HomePage.dart';
 import 'SignUpPage.dart';
@@ -16,6 +18,7 @@ class LoginLayout extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginLayout> {
+  
   // form key
   final _formKey = GlobalKey<FormState>();
 
@@ -181,7 +184,7 @@ class _LoginScreenState extends State<LoginLayout> {
           .then((uid) => {
         Fluttertoast.showToast(msg: "Login Successful"),
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage())),
+            MaterialPageRoute(builder: (context) => weatherSearch())),
       });
     }
   }

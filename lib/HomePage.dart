@@ -6,9 +6,13 @@ import 'package:assignment/weatherSearch.dart';
 import 'weatherSearch.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage(this.city,this.temp,this.airQual,this.humidity,this.windSpeed, {Key? key}) : super(key: key);
 
-  final _dataService = dataService();
-
+  final String city;
+  final String temp;
+  final String airQual;
+  final String humidity;
+  final String windSpeed;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +59,7 @@ class HomePage extends StatelessWidget {
                               height: 100,
                             ),
                             Text(
-                              "City",
+                              city,
                               style: TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -66,7 +70,7 @@ class HomePage extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              "City name",
+                              airQual,
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -79,7 +83,7 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Temperature",
+                              temp,
                               style: TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.w300,
@@ -177,11 +181,5 @@ class HomePage extends StatelessWidget {
       ),
 
     );
-  }
-  void _search() async {
-    final response = await _dataService.getWeather(_cityTextController.text,_stateTextController.text,_countryTextController.text);
-    print(response.data.city);
-    print(response.data.current.weather.tp);
-    print(response.data.current.pollution.aqius);
   }
 }
