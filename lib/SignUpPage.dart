@@ -130,26 +130,6 @@ class SignUpPagestate extends State<SignUpPage> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        /* suffixIcon: isObscure
-          ? IconButton(
-        onPressed: (){
-          setState(() {
-            isObscure = !isObscure;
-            //Navigator.pop(context);
-          });
-        },
-        icon: isObscure
-            ? Icon(
-          Icons.visibility_off,
-          color: Colors.black,
-
-        )
-            : Icon(
-          Icons.visibility,
-          color:Colors.black,
-        ),
-      )
-          : null,*/
       ),
     );
 
@@ -287,64 +267,6 @@ class SignUpPagestate extends State<SignUpPage> {
     );
   }
 
-/*  Widget buildInputDetailsForm({label, obscureText}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        TextFormField(
-        obscureText: obscureText? isObscure : false,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-              vertical: 0,
-              horizontal: 10,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-            ),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-            ),
-          ),
-          suffixIcon: obscureText
-            ? IconButton(
-              onPressed: (){
-                setState(() {
-                  isObscure = !isObscure;
-                  //Navigator.pop(context);
-                });
-              },
-              icon: isObscure
-              ? Icon(
-                  Icons.visibility_off,
-                  color: Colors.black,
-
-                )
-                : Icon(
-                  Icons.visibility,
-                  color:Colors.black,
-                ),
-            )
-              : null,
-          ),
-        ),
-      ],
-    );
-  }*/
-
   Widget PolicyCheck() {
     return Container(
       padding: EdgeInsets.only(top: 3, left: 3),
@@ -439,9 +361,9 @@ class SignUpPagestate extends State<SignUpPage> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully ");
 
-  /*  Navigator.pushAndRemoveUntil(
+    Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => HomePage()),
             (route) => false);
-  */}
+  }
 }

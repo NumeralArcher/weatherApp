@@ -1,7 +1,7 @@
-import 'package:assignment/HomePage.dart';
+import 'package:assignment/weatherOutput.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment/dataService.dart';
-import 'models.dart';
+import 'Drawer.dart';
 import 'dataService.dart';
 
 class weatherSearch extends StatefulWidget {
@@ -22,6 +22,11 @@ class _weatherSearchState extends State<weatherSearch> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+        drawer: MyDrawer(),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+        ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,18 +64,19 @@ class _weatherSearchState extends State<weatherSearch> {
                 ElevatedButton(
                     onPressed: () async {
                       final response = await _dataService.getWeather(_cityTextController.text,_stateTextController.text,_countryTextController.text);
-                      final String cityName = response.data.city;
+                      final String city = response.data.city.toString();
+                      final String state = response.data.state.toString();
+                      final String country = response.data.country.toString();
                       final String temp = response.data.current.weather.tp.toString();
                       final String airQual = response.data.current.pollution.aqius.toString();
                       final String humidity = response.data.current.weather.hu.toString();
                       final String windSpeed = response.data.current.weather.ws.toString();
                       Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => HomePage(cityName,temp,airQual,humidity,windSpeed)));
+                      builder: (context) => weatherOutput(city: city,state: state,country: country,temp: temp,airQual: airQual,humidity: humidity,windSpeed: windSpeed)));
                 }, child: Text('Search'))
               ],
             ),
           ),
         ));
   }
-
-  }
+}

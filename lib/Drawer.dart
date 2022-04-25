@@ -2,6 +2,7 @@ import 'package:assignment/HomePage.dart';
 import 'package:assignment/weatherSearch.dart';
 import 'package:flutter/material.dart';
 import 'LoginLayout.dart';
+import 'favorites.dart';
 
 class MyDrawer extends StatelessWidget{
   final padding = EdgeInsets.symmetric(horizontal: 10);
@@ -71,11 +72,11 @@ Widget buildMenuItem({
 void selectedItem(BuildContext context, int index){
   Navigator.of(context).pop();
   switch(index){
-/*    case 1:
+      case 1:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => HomePage(),
       ));
-      break;*/
+      break;
     case 2:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => weatherSearch(),
@@ -83,7 +84,7 @@ void selectedItem(BuildContext context, int index){
       break;
     case 3:
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => LoginLayout(),
+        builder: (context) => Favorites(),
       ));
       break;
     case 4:

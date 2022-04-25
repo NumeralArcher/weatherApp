@@ -3,20 +3,20 @@ import 'dart:convert';
 /*{
   "status": "success",
   "data": {
-    "city": "Eilat",
+    "city": "Eilat",//////
     "state": "South District",
-    "country": "Israel",
+    "country": "Israel",///////
     "current": {
       "weather": {
-        "tp": 12,
-        "pr": 1020,
-        "hu": 62,
-        "ws": 2,
+        "tp": 12,/////////
+        "pr": 1020,///////
+        "hu": 62,///////
+        "ws": 2,////////
         "wd": 320,
         "ic": "01n"
       },
       "pollution": {
-        "aqius": 18,
+        "aqius": 18,////////
         "aqicn": 20,
       }
     }
