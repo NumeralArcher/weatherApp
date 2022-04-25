@@ -9,6 +9,8 @@ class Favorites extends StatelessWidget {
     return Container();
   }
 }
+
+
 /*
 Stream<List<Favorites>> displayFavs() => FirebaseFirestore.instance
 .collection('favorites');*/

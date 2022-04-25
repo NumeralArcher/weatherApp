@@ -6,7 +6,6 @@ import 'dataService.dart';
 
 class weatherSearch extends StatefulWidget {
 
-
   @override
   State<weatherSearch> createState() => _weatherSearchState();
 }

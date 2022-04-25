@@ -5,6 +5,7 @@ import 'Drawer.dart';
 class weatherOutput extends StatefulWidget {
   const weatherOutput({Key? key ,required this.city,required this.state,required this.country,required this.temp,required this.airQual,required this.humidity,required this.windSpeed}) : super(key: key);
 
+
   final String city;
   final String state;
   final String country;
@@ -16,9 +17,7 @@ class weatherOutput extends StatefulWidget {
   @override
   State<weatherOutput> createState() => _weatherOutputState();
 }
-
 //'${widget.title}'
-
 class _weatherOutputState extends State<weatherOutput> {
   @override
   Widget build(BuildContext context) {
@@ -189,14 +188,11 @@ class _weatherOutputState extends State<weatherOutput> {
 
   Future addFavorite({required String city, required String state, required String country}) async{
     final docFav = FirebaseFirestore.instance.collection('favorites').doc();
-
     final json = {
       'city' : city,
       'state' : state,
       'country' : country,
     };
-
     await docFav.set(json);
-
   }
 }
