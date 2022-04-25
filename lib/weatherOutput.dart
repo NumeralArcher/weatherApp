@@ -5,7 +5,6 @@ import 'Drawer.dart';
 class weatherOutput extends StatefulWidget {
   const weatherOutput({Key? key ,required this.city,required this.state,required this.country,required this.temp,required this.airQual,required this.humidity,required this.windSpeed}) : super(key: key);
 
-
   final String city;
   final String state;
   final String country;
@@ -73,9 +72,9 @@ class _weatherOutputState extends State<weatherOutput> {
                               height: 5,
                             ),
                             Text(
-                              '${widget.airQual}',
+                              '${widget.country}',
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black54,
                               ),
@@ -83,12 +82,12 @@ class _weatherOutputState extends State<weatherOutput> {
                           ],
                         ),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              '${widget.temp}',
+                              "${widget.temp}",
                               style: TextStyle(
-                                fontSize: 35,
+                                fontSize: 60,
                                 fontWeight: FontWeight.w300,
                                 color: Colors.black54,
                               ),
@@ -96,10 +95,10 @@ class _weatherOutputState extends State<weatherOutput> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 10,
+                                  width: 100,
                                 ),
                                 Text(
-                                  "Temperature icon",
+                                  "Humidity : ${widget.humidity}",
                                   style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
@@ -131,7 +130,7 @@ class _weatherOutputState extends State<weatherOutput> {
                             Column(
                               children: [
                                 Text(
-                                  'Air quality',
+                                  '${widget.airQual}',
                                   style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
@@ -150,23 +149,20 @@ class _weatherOutputState extends State<weatherOutput> {
                             ),
                             Column(
                               children: [
-                                GestureDetector(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white, shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(35),
-                                    )),
-                                    onPressed: () {
-                                    },
-
-                                    child: const Text(
-                                      'Add Observation',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                Text(
+                                  '${widget.windSpeed}',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Text(
+                                  "Wind Speed",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
                                   ),
                                 ),
                               ],
@@ -185,14 +181,16 @@ class _weatherOutputState extends State<weatherOutput> {
 
     );
   }
-
   Future addFavorite({required String city, required String state, required String country}) async{
     final docFav = FirebaseFirestore.instance.collection('favorites').doc();
+
     final json = {
       'city' : city,
       'state' : state,
       'country' : country,
     };
+
     await docFav.set(json);
+
   }
 }

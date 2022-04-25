@@ -2,7 +2,6 @@ import 'package:assignment/HomePage.dart';
 import 'package:assignment/weatherSearch.dart';
 import 'package:flutter/material.dart';
 import 'LoginLayout.dart';
-import 'favorites.dart';
 
 class MyDrawer extends StatelessWidget{
   final padding = EdgeInsets.symmetric(horizontal: 10);
@@ -27,18 +26,6 @@ class MyDrawer extends StatelessWidget{
                 text: 'Search by City',
                 icon: Icons.search,
                 onClicked: () => selectedItem(context,2),
-              ),
-              const SizedBox(height: 16,),
-              buildMenuItem(
-                text: 'View favourites',
-                icon: Icons.favorite,
-                onClicked: () => selectedItem(context,3),
-              ),
-              const SizedBox(height: 16,),
-              buildMenuItem(
-                text: 'Observations',
-                icon: Icons.assignment_rounded,
-                onClicked: () => selectedItem(context,4),
               ),
               const SizedBox(height: 16,),
               buildMenuItem(
@@ -83,16 +70,6 @@ void selectedItem(BuildContext context, int index){
       ));
       break;
     case 3:
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => Favorites(),
-      ));
-      break;
-    case 4:
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => LoginLayout(),
-      ));
-      break;
-    case 5:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => LoginLayout(),
       ));

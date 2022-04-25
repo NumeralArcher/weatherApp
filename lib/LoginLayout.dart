@@ -1,14 +1,10 @@
 import 'package:assignment/weatherSearch.dart';
-
-import 'HomePage.dart';
-import 'HomePage.dart';
 import 'SignUpPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:assignment/HomePage.dart';
 import 'package:assignment/SignUpPage.dart';
-import 'package:flutter/src/rendering/box.dart';
+
 
 class LoginLayout extends StatefulWidget {
   const LoginLayout({Key? key}) : super(key: key);
@@ -149,13 +145,11 @@ class _LoginScreenState extends State<LoginLayout> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Don't have an account? "),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUpPage()));
-                              },
+                            ElevatedButton(
+                              onPressed: () { Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpPage())); },
                               child: Text(
                                 "SignUp",
                                 style: TextStyle(
