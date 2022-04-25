@@ -31,7 +31,7 @@ class MyDrawer extends StatelessWidget{
               buildMenuItem(
                 text: 'Log out',
                 icon: Icons.arrow_back,
-                onClicked: () => selectedItem(context,5),
+                onClicked: () => selectedItem(context,3),
               ),
             ],
           ),

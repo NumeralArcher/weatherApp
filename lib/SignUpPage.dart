@@ -256,46 +256,11 @@ class SignUpPagestate extends State<SignUpPage> {
                 SizedBox(height: 20,),
                 confirmPasswordField,
                 SizedBox(height: 20,),
-                PolicyCheck(),
-                SizedBox(height: 20,),
                 buildSignUpBtn(),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget PolicyCheck() {
-    return Container(
-      padding: EdgeInsets.only(top: 3, left: 3),
-      height: 20,
-      child: Row(
-        children: <Widget>[
-          SizedBox(width: 10,),
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.black),
-            child: Checkbox(
-              value: isAgreed,
-              checkColor: Colors.green,
-              activeColor: Colors.black,
-              onChanged: (value) {
-                setState(() {
-                  isAgreed = value!;
-                });
-              },
-            ),
-          ),
-          const Text(
-            'I Agree to terms and conditions',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }
